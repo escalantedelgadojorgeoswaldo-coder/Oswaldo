@@ -1,0 +1,545 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El peso físico de la nube — impacto ambiental del almacenamiento digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161d1f;
+    --ink-soft:#232c2e;
+    --cream:#f6f2ea;
+    --paper:#eef3f2;
+    --paper-line:#d7e0dd;
+    --cyan:#1f8a8c;
+    --cyan-deep:#0f5658;
+    --amber:#c98a2b;
+    --amber-deep:#8b5a2b;
+    --slate:#45535c;
+    --slate-deep:#2c363c;
+    --gold:#c9a227;
+    --danger:#a4432f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em; text-wrap:balance;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    opacity:0.8;
+  }
+  section{padding:6rem 6vw;}
+  .wrap{max-width:1100px; margin:0 auto;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    background:radial-gradient(ellipse 90% 70% at 75% 20%, #23393a 0%, var(--ink) 55%);
+    color:var(--cream);
+    display:flex;
+    align-items:center;
+    padding:8vh 6vw;
+    overflow:hidden;
+  }
+  .hero-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:4vw;
+    align-items:center;
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .hero-eyebrow{color:var(--gold); margin-bottom:1.1rem;}
+  .hero h1{
+    font-size:clamp(2.4rem, 4.6vw, 4.1rem);
+    line-height:1.02;
+  }
+  .hero h1 em{font-style:italic; color:var(--cyan);}
+  .hero-sub{
+    margin-top:1.4rem;
+    max-width:46ch;
+    font-size:1.1rem;
+    color:#c9d6d3;
+  }
+  .hero-scroll{
+    margin-top:2.4rem;
+    display:inline-flex;
+    align-items:center;
+    gap:0.6rem;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .hero-art{display:flex; align-items:center; justify-content:center;}
+  .hero-art svg{width:100%; max-width:340px; height:auto;}
+
+  /* ---------- INTRO ---------- */
+  .intro{padding-top:6.5rem;}
+  .intro .wrap{max-width:760px; text-align:center; margin:0 auto;}
+  .intro .eyebrow{color:var(--amber-deep); margin-bottom:1rem;}
+  .intro h2{font-size:clamp(1.6rem,3vw,2.3rem); margin-bottom:1.3rem;}
+  .intro p{font-size:1.08rem; color:#3a3a35;}
+  .intro p + p{margin-top:1rem;}
+
+  /* ---------- STATS ---------- */
+  .stats{background:var(--ink); color:var(--cream); padding:5.5rem 6vw;}
+  .stats-head{text-align:center; max-width:640px; margin:0 auto 3.2rem;}
+  .stats-head .eyebrow{color:var(--gold);}
+  .stats-head h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-top:0.6rem; color:var(--cream);}
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:rgba(246,242,234,0.14);
+    border:1px solid rgba(246,242,234,0.14);
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .stat-tile{background:var(--ink-soft); padding:2.4rem 1.6rem; text-align:center;}
+  .stat-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:clamp(1.7rem,2.6vw,2.3rem);
+    font-weight:600;
+    color:var(--cyan);
+  }
+  .stat-label{margin-top:0.7rem; font-size:0.88rem; color:#b9c7c4; line-height:1.45;}
+  .stat-src{margin-top:3rem; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:#7c8c89; letter-spacing:0.03em;}
+  .stat-src a{color:#9fb6b2;}
+
+  /* ---------- CAUSAS (3 cards) ---------- */
+  .causas .wrap{max-width:1100px;}
+  .causas-head{text-align:center; max-width:640px; margin:0 auto 3.4rem;}
+  .causas-head .eyebrow{color:var(--cyan-deep);}
+  .causas-head h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-top:0.6rem;}
+  .causa-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.6rem;
+  }
+  .causa-card{
+    background:#fff;
+    border:1px solid var(--paper-line);
+    border-radius:4px;
+    padding:2.2rem 1.8rem;
+    border-top:3px solid var(--amber-deep);
+  }
+  .causa-card.water{border-top-color:var(--cyan);}
+  .causa-card.hardware{border-top-color:var(--slate);}
+  .causa-card svg{width:38px; height:38px; margin-bottom:1.2rem;}
+  .causa-card .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:#9a9284;
+    margin-bottom:0.5rem;
+  }
+  .causa-card h3{font-size:1.2rem; margin-bottom:0.6rem;}
+  .causa-card p{font-size:0.94rem; color:#4a4a44;}
+
+  /* ---------- ACCIONES ---------- */
+  .acciones{background:var(--paper); border-top:1px solid var(--paper-line); border-bottom:1px solid var(--paper-line);}
+  .acciones .wrap{max-width:820px; margin:0 auto;}
+  .acciones-head{text-align:center; margin-bottom:2.6rem;}
+  .acciones-head .eyebrow{color:var(--slate-deep);}
+  .acciones-head h2{font-size:clamp(1.6rem,3vw,2.1rem); margin-top:0.6rem;}
+  .accion-list{display:grid; gap:0.9rem;}
+  .accion-item{
+    display:flex; gap:1rem; align-items:flex-start;
+    background:#fff; border:1px solid var(--paper-line); border-radius:4px;
+    padding:1.1rem 1.3rem;
+  }
+  .accion-item .mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem; color:var(--cyan-deep); font-weight:600;
+    flex-shrink:0; padding-top:0.15rem;
+  }
+  .accion-item p{font-size:0.96rem; color:#333;}
+
+  /* ---------- MURO DE OPINIONES ---------- */
+  .muro{padding-top:6.5rem;}
+  .muro .wrap{max-width:820px; margin:0 auto;}
+  .muro-head{text-align:center; margin-bottom:1rem;}
+  .muro-head .eyebrow{color:var(--amber-deep);}
+  .muro-head h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-top:0.6rem;}
+  .muro-head p{max-width:52ch; margin:1rem auto 0; color:#4a4a44; font-size:1rem;}
+  .muro-list{display:flex; flex-direction:column; gap:1rem; margin-top:2.6rem;}
+  .muro-card{
+    background:#fff; border:1px solid var(--paper-line); border-radius:4px;
+    padding:1.3rem 1.5rem; position:relative;
+  }
+  .muro-card.example{background:var(--paper); font-style:italic; color:#5a6460;}
+  .muro-card p.text{font-size:1rem; color:#2c2c28;}
+  .muro-card.example p.text{color:#5a6460;}
+  .muro-meta{
+    margin-top:0.7rem; display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:#9a9284;
+  }
+  .muro-empty{text-align:center; color:#9a9284; font-size:0.92rem; padding:1.4rem 0;}
+
+  /* ---------- FORM ---------- */
+  .formulario{background:var(--slate-deep); color:var(--cream);}
+  .formulario .wrap{max-width:640px; margin:0 auto;}
+  .form-head{text-align:center; margin-bottom:2.6rem;}
+  .form-head .eyebrow{color:var(--cyan);}
+  .form-head h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-top:0.6rem; color:var(--cream);}
+  .form-head p{margin-top:0.9rem; color:#c3cdd1; font-size:0.98rem;}
+  form{
+    background:rgba(246,242,234,0.04);
+    border:1px solid rgba(246,242,234,0.14);
+    border-radius:6px;
+    padding:2.2rem;
+    display:grid;
+    gap:1.3rem;
+  }
+  .field{display:grid; gap:0.5rem;}
+  .field label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#a9bbb6;
+  }
+  .field input, .field textarea{
+    font-family:'Inter',sans-serif;
+    font-size:1rem;
+    background:rgba(246,242,234,0.06);
+    border:1px solid rgba(246,242,234,0.22);
+    border-radius:4px;
+    padding:0.8rem 0.9rem;
+    color:var(--cream);
+  }
+  .field input::placeholder, .field textarea::placeholder{color:#7c8c89;}
+  .field input:focus, .field textarea:focus{
+    outline:2px solid var(--cyan);
+    outline-offset:1px;
+    border-color:var(--cyan);
+  }
+  .field textarea{resize:vertical; min-height:110px;}
+  .form-submit{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    background:var(--cyan);
+    color:#08201f;
+    border:none;
+    border-radius:4px;
+    padding:0.95rem 1.4rem;
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .form-submit:hover{background:#2ba3a5;}
+  .form-submit:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  .form-submit:disabled{opacity:0.6; cursor:default;}
+  .form-status{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.82rem;
+    padding:0.9rem 1rem;
+    border-radius:4px;
+    display:none;
+    line-height:1.5;
+  }
+  .form-status.show{display:block;}
+  .form-status.ok{background:rgba(31,138,140,0.18); border:1px solid var(--cyan); color:#bfe6e3;}
+  .form-status.warn{background:rgba(201,138,43,0.16); border:1px solid var(--amber); color:#f0d5a8;}
+  .form-status.err{background:rgba(164,67,47,0.18); border:1px solid var(--danger); color:#f0bcae;}
+
+  footer{
+    text-align:center;
+    padding:2.2rem;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    color:#8a8577;
+    background:var(--ink);
+  }
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-art{order:-1; max-width:220px; margin:0 auto;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .causa-grid{grid-template-columns:1fr;}
+    section{padding:4.5rem 6vw;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow hero-eyebrow">impacto ambiental del almacenamiento en la nube</div>
+      <h1>La nube no es aire.<br>Es un edificio que <em>consume</em>.</h1>
+      <p class="hero-sub">Cada foto, correo o respaldo que "subimos a la nube" termina en un centro de datos: miles de servidores encendidos las 24 horas, que necesitan electricidad para funcionar y agua para no sobrecalentarse.</p>
+      <div class="hero-scroll">↓ qué hay detrás de la nube</div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 220 260" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M55 95 C40 95 30 84 30 71 C30 57 42 47 55 48 C58 32 73 20 90 20 C109 20 124 34 126 52 C142 52 154 64 154 79 C154 93 142 104 128 104 L58 104 Z"
+          fill="none" stroke="var(--cream)" stroke-width="2.6" opacity="0.9"/>
+        <line x1="92" y1="104" x2="92" y2="140" stroke="var(--gold)" stroke-width="2" stroke-dasharray="3 5"/>
+        <line x1="60" y1="104" x2="60" y2="128" stroke="var(--gold)" stroke-width="2" stroke-dasharray="3 5"/>
+        <line x1="124" y1="104" x2="124" y2="128" stroke="var(--gold)" stroke-width="2" stroke-dasharray="3 5"/>
+        <rect x="40" y="140" width="140" height="100" rx="3" fill="var(--ink-soft)" stroke="var(--cyan)" stroke-width="2.2"/>
+        <line x1="40" y1="164" x2="180" y2="164" stroke="var(--cyan)" stroke-width="1.4" opacity="0.55"/>
+        <line x1="40" y1="188" x2="180" y2="188" stroke="var(--cyan)" stroke-width="1.4" opacity="0.55"/>
+        <line x1="40" y1="212" x2="180" y2="212" stroke="var(--cyan)" stroke-width="1.4" opacity="0.55"/>
+        <circle cx="54" cy="152" r="3" fill="var(--cyan)"/>
+        <circle cx="54" cy="176" r="3" fill="var(--amber)"/>
+        <circle cx="54" cy="200" r="3" fill="var(--cyan)"/>
+        <circle cx="54" cy="224" r="3" fill="var(--cyan)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="wrap">
+    <div class="eyebrow">qué es, en realidad</div>
+    <h2>Guardar en la nube es guardar en la casa de alguien más</h2>
+    <p>El "almacenamiento en la nube" es el servicio que nos permite guardar archivos en servidores remotos —propiedad de empresas como Google, Amazon o Microsoft— en vez de en el disco duro de nuestro propio dispositivo. Accedemos a esos archivos por internet, desde cualquier lugar, y por eso da la sensación de que "flotan" en algún sitio abstracto.</p>
+    <p>Pero no flotan: viven en <strong>centros de datos</strong>, edificios industriales llenos de servidores que deben permanecer encendidos y refrigerados sin interrupción, todos los días del año. Esa disponibilidad constante tiene un costo físico: electricidad, agua y hardware que se fabrica, se desgasta y se desecha.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-head">
+    <div class="eyebrow">la nube en números</div>
+    <h2>Lo invisible, medido</h2>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-tile">
+      <div class="stat-num">415 TWh</div>
+      <div class="stat-label">consumió la electricidad de los centros de datos del mundo en 2024 — cerca del 1.5% de toda la electricidad global</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num">~945 TWh</div>
+      <div class="stat-label">es lo que se proyecta para 2030: el doble, casi 3% del consumo eléctrico mundial</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num">1.1M litros</div>
+      <div class="stat-label">de agua al día consume, en promedio, un solo centro de datos para enfriar sus servidores</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num">2–4%</div>
+      <div class="stat-label">de las emisiones globales de gases de efecto invernadero provienen del sector de las tecnologías digitales — similar a la aviación</div>
+    </div>
+  </div>
+  <div class="stat-src">fuentes: Agencia Internacional de la Energía (IEA), «Energy and AI» 2025 · ITU / Banco Mundial, «Measuring the Emissions &amp; Energy Footprint of the ICT Sector» 2024</div>
+</section>
+
+<!-- CAUSAS -->
+<section class="causas">
+  <div class="wrap">
+    <div class="causas-head">
+      <div class="eyebrow">de dónde viene el impacto</div>
+      <h2>Tres razones por las que un archivo pesa más de lo que parece</h2>
+    </div>
+    <div class="causa-grid">
+      <div class="causa-card energy">
+        <svg viewBox="0 0 48 48" fill="none" stroke="var(--amber-deep)" stroke-width="2.4">
+          <path d="M26 4 L12 28 L22 28 L20 44 L38 20 L26 20 Z" stroke-linejoin="round"/>
+        </svg>
+        <div class="num">01</div>
+        <h3>Energía, sin descanso</h3>
+        <p>Los servidores no se apagan nunca: procesan, respaldan y sincronizan datos las 24 horas. Cuanto más subimos —fotos en alta resolución, video, copias duplicadas—, más servidores hacen falta y más electricidad consumen.</p>
+      </div>
+      <div class="causa-card water">
+        <svg viewBox="0 0 48 48" fill="none" stroke="var(--cyan-deep)" stroke-width="2.4">
+          <path d="M24 6 C24 6 12 22 12 32 C12 39.7 17.4 44 24 44 C30.6 44 36 39.7 36 32 C36 22 24 6 24 6 Z" stroke-linejoin="round"/>
+        </svg>
+        <div class="num">02</div>
+        <h3>Agua para enfriar</h3>
+        <p>Tanto silicio trabajando genera calor, y ese calor se controla con torres de enfriamiento que evaporan agua dulce. Muchos centros de datos se construyen en regiones que ya sufren estrés hídrico.</p>
+      </div>
+      <div class="causa-card hardware">
+        <svg viewBox="0 0 48 48" fill="none" stroke="var(--slate-deep)" stroke-width="2.4">
+          <rect x="8" y="10" width="32" height="28" rx="2" stroke-linejoin="round"/>
+          <line x1="8" y1="20" x2="40" y2="20"/>
+          <line x1="8" y1="29" x2="40" y2="29"/>
+          <circle cx="14" cy="15" r="1.6" fill="var(--slate-deep)" stroke="none"/>
+        </svg>
+        <div class="num">03</div>
+        <h3>Hardware que se desecha</h3>
+        <p>Fabricar cada servidor deja una huella de carbono "escondida" en los chips y metales que lo componen. Los equipos se reemplazan cada 3 a 5 años, generando basura electrónica difícil de reciclar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCIONES -->
+<section class="acciones">
+  <div class="wrap">
+    <div class="acciones-head">
+      <div class="eyebrow">qué sí depende de nosotros</div>
+      <h2>No podemos apagar un centro de datos, pero sí aligerar lo que le pedimos</h2>
+    </div>
+    <div class="accion-list">
+      <div class="accion-item"><span class="mark">→</span><p>Borrar correos, fotos duplicadas y respaldos viejos que ya nadie necesita: cada archivo guardado ocupa espacio activo y energía real.</p></div>
+      <div class="accion-item"><span class="mark">→</span><p>Bajar la resolución o calidad de las copias automáticas de fotos y videos cuando el original ya no hace falta.</p></div>
+      <div class="accion-item"><span class="mark">→</span><p>Preferir proveedores que publiquen compromisos claros de energía renovable y eficiencia hídrica en sus centros de datos.</p></div>
+      <div class="accion-item"><span class="mark">→</span><p>Alargar la vida útil de los dispositivos: la huella de fabricar hardware nuevo suele pesar más que seguir usando el actual.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MURO DE OPINIONES -->
+<section class="muro">
+  <div class="wrap">
+    <div class="muro-head">
+      <div class="eyebrow">espacio abierto</div>
+      <h2>¿Qué piensas tú?</h2>
+      <p>Antes de llenar el formulario, este es un espacio para pensarlo en voz alta. Escribe tu opinión sobre el impacto ambiental de la nube y compártela abajo — se sumará a este muro y, al mismo tiempo, quedará registrada en la encuesta.</p>
+    </div>
+    <div class="muro-list" id="muroList"></div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="formulario">
+  <div class="wrap">
+    <div class="form-head">
+      <div class="eyebrow">encuesta</div>
+      <h2>Regístrala en la encuesta</h2>
+      <p>Tu nombre, correo y opinión se guardan automáticamente en una hoja de cálculo y, al terminar, te llegará un correo agradeciéndote por participar.</p>
+    </div>
+    <form id="opinionForm">
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+      </div>
+      <div class="field">
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+      </div>
+      <div class="field">
+        <label for="opinion">Tu opinión</label>
+        <textarea id="opinion" name="opinion" placeholder="¿Qué piensas del impacto ambiental del almacenamiento en la nube?" required></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">Enviar mi opinión</button>
+      <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<footer>impacto ambiental del almacenamiento en la nube — la infraestructura invisible detrás de cada archivo</footer>
+
+<script>
+  // Pega aquí la URL del webhook de Make (módulo "Custom Webhook").
+  // Mientras diga "PON_AQUI_TU_WEBHOOK", el formulario no intentará enviarla y solo avisará que falta configurarla.
+  const WEBHOOK_URL = "https://hook.us2.make.com/s5e9i5p9r9nxhjyapi52rdvtbv2jtkxq";
+
+  const STORAGE_KEY = "nube_opiniones_muro";
+  const ejemplos = [
+    { nombre: "Ejemplo", opinion: "Nunca había pensado que borrar mis fotos duplicadas pudiera importarle a un río en otro país.", fecha: null },
+    { nombre: "Ejemplo", opinion: "Me parece increíble que algo tan 'ligero' como un archivo dependa de tanta agua y electricidad.", fecha: null }
+  ];
+
+  function cargarOpiniones(){
+    try{
+      const guardadas = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return guardadas;
+    }catch(e){ return []; }
+  }
+
+  function guardarOpinion(op){
+    try{
+      const actuales = cargarOpiniones();
+      actuales.unshift(op);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(actuales.slice(0, 30)));
+    }catch(e){ /* almacenamiento no disponible en este navegador */ }
+  }
+
+  function formatearFecha(fecha){
+    if(!fecha) return "opinión de ejemplo";
+    const d = new Date(fecha);
+    return d.toLocaleDateString("es-MX", { day:"numeric", month:"short", year:"numeric" });
+  }
+
+  function pintarMuro(){
+    const lista = document.getElementById("muroList");
+    const propias = cargarOpiniones();
+    const todas = [...propias, ...ejemplos];
+    lista.innerHTML = "";
+    todas.forEach(op => {
+      const card = document.createElement("div");
+      card.className = "muro-card" + (op.fecha ? "" : " example");
+      card.innerHTML = `<p class="text">"${op.opinion}"</p>
+        <div class="muro-meta"><span>${op.nombre}</span><span>${formatearFecha(op.fecha)}</span></div>`;
+      lista.appendChild(card);
+    });
+  }
+
+  function mostrarEstado(tipo, mensaje){
+    const el = document.getElementById("formStatus");
+    el.className = "form-status show " + tipo;
+    el.textContent = mensaje;
+  }
+
+  document.getElementById("opinionForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+    const btn = document.getElementById("submitBtn");
+    const nombre = document.getElementById("nombre").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const opinion = document.getElementById("opinion").value.trim();
+    if(!nombre || !correo || !opinion) return;
+
+    const payload = { nombre, correo, opinion, fecha: new Date().toISOString() };
+
+    // El muro se actualiza siempre, aunque el webhook aún no esté configurado.
+    guardarOpinion(payload);
+    pintarMuro();
+
+    if(WEBHOOK_URL.includes("PON_AQUI_TU_WEBHOOK")){
+      mostrarEstado("warn", "Tu opinión se guardó en esta página, pero el Webhook de Make todavía no está configurado: busca WEBHOOK_URL en el código y sigue los pasos de configuración para que también se guarde en Google Sheets y te llegue el correo de agradecimiento.");
+      document.getElementById("opinionForm").reset();
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+    try{
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      mostrarEstado("ok", "¡Gracias! Tu opinión quedó registrada. En unos minutos te llegará un correo de confirmación a " + correo + ".");
+      document.getElementById("opinionForm").reset();
+    }catch(err){
+      mostrarEstado("err", "No se pudo enviar la opinión al servidor (revisa tu conexión o la configuración del Webhook). Quedó guardada en esta página mientras tanto.");
+    }finally{
+      btn.disabled = false;
+      btn.textContent = "Enviar mi opinión";
+    }
+  });
+
+  pintarMuro();
+</script>
+
+</body>
+</html>
