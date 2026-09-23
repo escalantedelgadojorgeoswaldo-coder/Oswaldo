@@ -39,7 +39,7 @@ Al conectarse, el Monitor Serial muestra la IP del servidor (`Servidor listo en:
 🖥️ [Ver captura de la terminal](Terminal/TerminalLedViaWeb.png)
 
 ## Video del funcionamiento
-▶️ [Ver video en YouTube](https://youtu.be/AsJhrTXBEjl?feature=shared)
+▶️ [Ver video en YouTube](https://youtu.be/AsJhrTXBEjI?feature=shared)
 
 ## Evidencias de armado
 <img src="Diagrama/LedViaWeb.png" width="300">
