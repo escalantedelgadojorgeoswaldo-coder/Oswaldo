@@ -39,9 +39,7 @@ El alumno toma una foto de un organismo del jardín del Tecnológico y la envía
 | Tiene foto | Router (2) → Download a File (4) | `{{1.message.photo}}` **existe** |
 
 ## Código
-📄 [SystemPrompt.txt](Codigo/SystemPrompt.txt): instrucciones del AI Agent. Hacen que el agente se enfoque en el organismo principal de la foto e ignore el fondo, como el pasto o la tierra.
-
-🧩 [Ecosistema.blueprint.json](Codigo/Ecosistema.blueprint.json): blueprint del escenario. Se importa en Make desde **⋯ → Import Blueprint**.
+🧩 [Ecosistema.blueprint.json](Codigo/Ecosistema.blueprint.json): blueprint del escenario, con los 6 módulos, los filtros y las instrucciones (system prompt) del AI Agent. Se importa en Make desde **⋯ → Import Blueprint**.
 
 ## Terminal
 Respuestas del bot en Telegram:
