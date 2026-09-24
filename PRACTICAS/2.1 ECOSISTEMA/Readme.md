@@ -57,10 +57,6 @@ Respuestas del bot en Telegram:
 | Nandina | 🔎 Nandina (Nandina domestica) · 🌱 Productor · ♻️ Proporciona alimento y refugio para insectos, mejora estética y microhábitat. |
 | Bugambilia con árboles y pasto de fondo | 🔎 Bougainvillea (Bougainvillea glabra) · 🌱 Productor · ♻️ Contribuye al ecosistema como productor, realiza fotosíntesis y provee alimento a herbívoros |
 
-Foto usada para ajustar el prompt (sábila con pasto de fondo):
-
-<img src="Resultados/Prueba_Sabila.webp" width="250">
-
 ## Reporte
 📑 [Reporte_practica_Ecosistema.pdf](Reporte/Reporte_practica_Ecosistema.pdf)
 
