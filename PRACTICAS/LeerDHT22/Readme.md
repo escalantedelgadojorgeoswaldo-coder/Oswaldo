@@ -24,10 +24,10 @@ Comprender el funcionamiento de sensores digitales de temperatura y humedad (DHT
 <img src="Imagenes/Armado.jpeg" width="200">
 
 ## Reporte
-[Reporte](Reporte/Reporte_carrito_solar.pdf)
+[Reporte](Reporte/Reporte_DHT22.pdf)
 
 ## Resultados
-[Resultados](Resultados/Resultados_Resultados_carrito_solar.pdf)
+[Resultados](Resultados/Resultados_DHT22.pdf)
 
 ## Video del funcionamiento
 [Ver video en YouTube](https://youtu.be/_8vWL7-cy7A?si=326fglBtK0db6jfc)
