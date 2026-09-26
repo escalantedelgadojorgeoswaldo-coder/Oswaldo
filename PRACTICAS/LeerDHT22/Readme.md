@@ -20,8 +20,10 @@ Comprender el funcionamiento de sensores digitales de temperatura y humedad (DHT
 <img src="Diagrama/DiagramaDHT22.png" width="200">
 
 ## Imágenes
-<img src="Imagenes/Armado2.jpeg" width="200">
-<img src="Imagenes/Armado.jpeg" width="200">
+<img src="Imagenes/Imagen.jpeg" width="200">
+<img src="Imagenes/Protoboard.jpeg" width="200">
+<img src="Imagenes/AireApagado.png" width="200">
+
 
 ## Reporte
 [Reporte](Reporte/Reporte_DHT22.pdf)
@@ -30,7 +32,7 @@ Comprender el funcionamiento de sensores digitales de temperatura y humedad (DHT
 [Resultados](Resultados/Resultados_DHT22.pdf)
 
 ## Video del funcionamiento
-[Ver video en YouTube](https://youtu.be/_8vWL7-cy7A?si=326fglBtK0db6jfc)
+[Ver video en YouTube 📽️](https://youtu.be/_8vWL7-cy7A?si=326fglBtK0db6jfc)
 
 ## Conclusiones
 El desarrollo de este proyecto permitió construir un sistema funcional de monitoreo ambiental que combina hardware (Arduino UNO R4 WiFi, sensor DHT22, LEDs indicadores) con servicios en la nube (Make.com, Telegram) para generar alertas automáticas según distintos umbrales de temperatura. A lo largo del proceso se identificaron y resolvieron diversos problemas característicos de proyectos IoT —errores de sintaxis, tiempos de conexión, resistencias incorrectas, drenado incompleto de peticiones HTTP y configuración de automatizaciones—, lo que reforzó la importancia de la depuración metódica paso a paso. El resultado final demuestra que es posible construir soluciones de monitoreo accesibles y de bajo costo, capaces de notificar condiciones ambientales relevantes de forma personalizada y en tiempo real.
