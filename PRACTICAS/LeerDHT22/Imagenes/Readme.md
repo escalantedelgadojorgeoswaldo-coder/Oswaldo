@@ -1,1 +1,1 @@
-
+Imagenes de la práctica.
