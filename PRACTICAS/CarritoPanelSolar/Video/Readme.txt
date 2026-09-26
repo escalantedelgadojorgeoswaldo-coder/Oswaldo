@@ -1,2 +1,2 @@
-Video del funcionamiento de la práctica 2.1 ECOSISTEMA:
-https://youtube.com/shorts/-S_tsjpR4As?si=0Jf4sVRUw31WJB1A
+Video del funcionamiento de la práctica CarritoPanelSolar:
+https://youtube.com/shorts/SbtoMiKNit0?si=lnFFx4c9K4KA40Vt
