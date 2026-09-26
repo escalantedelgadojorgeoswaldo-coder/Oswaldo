@@ -1,2 +1,2 @@
 CODIGO DE LA PRACTICA 
-[Codigo](sensortemperatura_telegramfiltros/)
+- [Codigo](sensortemperatura_telegramfiltros/)
