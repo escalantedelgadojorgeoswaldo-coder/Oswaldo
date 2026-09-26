@@ -17,7 +17,7 @@ Comprender el funcionamiento de sensores digitales de temperatura y humedad (DHT
 - Cable tipo USB C
   
 ## Diagrama
-<img src="Diagrama/DiagramaDHT22.png" "width="200">
+<img src="Diagrama/DiagramaDHT22.png" width="200">
 
 ## Imágenes
 <img src="Imagenes/Armado2.jpeg" width="200">
