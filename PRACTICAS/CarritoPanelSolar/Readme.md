@@ -5,7 +5,7 @@ Carrito Panel Solar
 Carrito que funciona por medio de motorreductores, alimentados con energia solar por medio de un panel solar.
 
 ## Objetivos de aprendizaje
-Diseñar una automatización en Make.com que conecte un bot de Telegram con un Agente de IA para identificar organismos del plantel y clasificar su rol trófico, como apoyo para la materia de Desarrollo Sustentable.
+Comprender el funcionamiento básico de un panel solar como fuente de energía, aplicar conceptos de circuitos en paralelo para alimentar dos motorreductores de forma simultánea, y experimentar de manera práctica cómo la intensidad de la luz solar afecta el desempeño de un sistema eléctrico.
 
 ## Material utilizado
 - 2 Motorreductores con llantas
@@ -22,10 +22,10 @@ Diseñar una automatización en Make.com que conecte un bot de Telegram con un A
 <img src="Imagenes/Armado.jpeg" width="200">
 
 ## Reporte
-[Reporte_practica_Ecosistema.pdf](Reporte/Reporte_carrito_solar.pdf)
+[Reporte](Reporte/Reporte_carrito_solar.pdf)
 
 ## Resultados
-[Resultados_Ecosistema.pdf](Resultados/Resultados_Resultados_carrito_solar.pdf)
+[Resultados](Resultados/Resultados_Resultados_carrito_solar.pdf)
 
 ## Video del funcionamiento
 [Ver video en YouTube](https://youtube.com/shorts/SbtoMiKNit0?si=lnFFx4c9K4KA40Vt)
