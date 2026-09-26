@@ -1,1 +1,1 @@
-
+Imagen del diagrama.
