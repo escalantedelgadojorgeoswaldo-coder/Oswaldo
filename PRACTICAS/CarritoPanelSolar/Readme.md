@@ -14,20 +14,21 @@ Diseñar una automatización en Make.com que conecte un bot de Telegram con un A
 - Panel solar 5v
 - Base para el carrito
   
-
+## Diagrama
+[Video del cableado](https://youtu.be/6cDTdDiKwVw?si=idxndIGvtgdmEw5z)
 
 ## Imágenes
-<img src="Imagenes/Armado2.jpeg" width="400">
-<img src="Imagenes/Armado.jpeg" width="300">
+<img src="Imagenes/Armado2.jpeg" width="200">
+<img src="Imagenes/Armado.jpeg" width="200">
 
 ## Reporte
-[Reporte_practica_Ecosistema.pdf](Reporte/Reporte_practica_Ecosistema.pdf)
+[Reporte_practica_Ecosistema.pdf](Reporte/Reporte_carrito_solar.pdf)
 
 ## Resultados
-[Resultados_Ecosistema.pdf](Resultados/Resultados_Ecosistema.pdf)
+[Resultados_Ecosistema.pdf](Resultados/Resultados_Resultados_carrito_solar.pdf)
 
 ## Video del funcionamiento
-[Ver video en YouTube](https://youtube.com/shorts/-S_tsjpR4As?si=0Jf4sVRUw31WJB1A)
+[Ver video en YouTube](https://youtube.com/shorts/SbtoMiKNit0?si=lnFFx4c9K4KA40Vt)
 
 ## Conclusiones
-Se construyó un escenario en Make.com que conecta un bot de Telegram con un Agente de IA con visión: con una sola foto se obtiene el nombre del organismo, su rol trófico y su función en el ecosistema. El bot identificó por especie las plantas probadas (nandina y bugambilia) y las clasificó como productores. La clave fue ajustar el prompt para que el agente se enfocara en el organismo principal de la foto y no en el fondo, como el pasto o la tierra.
+Se logró construir y probar un carrito capaz de desplazarse usando únicamente energía solar. Las pruebas confirmaron que su movimiento depende directamente de la cantidad de luz captada por el panel: con poca luz se desplazaba lento, con más luz se movía con normalidad, y en sombra se detenía por completo, demostrando de forma práctica el funcionamiento de la energía solar como fuente de movimiento.
