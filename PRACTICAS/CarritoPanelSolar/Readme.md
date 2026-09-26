@@ -14,12 +14,11 @@ Diseñar una automatización en Make.com que conecte un bot de Telegram con un A
 - Panel solar 5v
 - Base para el carrito
   
-## Código
-[Ecosistema.blueprint.json](Codigo/Ecosistema.blueprint.json)
+
 
 ## Imágenes
-<img src="Diagrama/Escenario.png" width="400">
-<img src="Terminal/RespuestaBot.webp" width="300">
+<img src="Imagenes/Armado2.jpeg" width="400">
+<img src="Imagenes/Armado.jpeg" width="300">
 
 ## Reporte
 [Reporte_practica_Ecosistema.pdf](Reporte/Reporte_practica_Ecosistema.pdf)
