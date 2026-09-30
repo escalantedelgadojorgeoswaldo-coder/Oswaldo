@@ -18,7 +18,7 @@ En esta práctica se creó un bot de Telegram llamado Biodiversidad, armado en M
 - Dispositivo con cámara
   
 ## Diagrama
-<img src="Diagrama/DiagramaBiodiversidad.png" width="200">
+<img src="Diagrama/DiagramaBiodiversidad.jpeg" width="200">
 
 ## Imágenes
 <img src="Imagenes/ImagenBiodiversidad.jpeg" width="200">
