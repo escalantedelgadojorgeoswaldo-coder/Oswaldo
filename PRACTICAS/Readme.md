@@ -5,3 +5,5 @@
 - [Carrito Solar](CarritoPanelSolar/) — práctica: carrito que funciona con luz solar.
 - [Arduino Leer DHT22](LeerDHT22/) — práctica: Arduino lee la temperatura de un cuarto.
 - [2.4 BIODIVERSIDAD](2.4%20BIODIVERSIDAD/) — práctica: Bot que analiza plantas.
+- [2.3 BIOSFERA](2.3%20BIOSFERA/) — práctica: Control de humedad de tierra.
+- 
