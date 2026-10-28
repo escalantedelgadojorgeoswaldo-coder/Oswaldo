@@ -19,8 +19,8 @@ Identificar qué organizaciones federales, estatales, municipales y sociales ati
 <img src="Imagenes/EscenarioMakeBuzonCiudadano.png" width="200">
 
 ## Imágenes
-<img src="Imagenes/TelegramBuzonCiudadano.png" width="200">
-<img src="Imagenes/GoogleSheets%20BuzonCiudadano.png" width="200">
+<img src="Imagenes/TelegramBuzonCiudadano.png" width="400">
+<img src="Imagenes/GoogleSheets%20BuzonCiudadano.png" width="400">
 
 ## Reporte
 [Reporte](Resultados/Reporte_3.1_OrganizacionSocial.pdf)
