@@ -23,7 +23,7 @@ Identificar qué organizaciones federales, estatales, municipales y sociales ati
 <img src="Imagenes/GoogleSheets%20BuzonCiudadano.png" width="400">
 
 ## Código
-[Blueprint del escenario de Make](Codigo/BuzonCiudadano.blueprint.json)
+[Blueprint del escenario de Make](Codigo/Buzon_Ciudadano.blueprint.json)
 
 ## Reporte
 [Reporte](Resultados/Reporte_3.1_OrganizacionSocial.pdf)
