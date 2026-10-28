@@ -7,3 +7,5 @@
 - [2.4 BIODIVERSIDAD](2.4%20BIODIVERSIDAD/) — práctica: Bot que analiza plantas.
 - [2.3 BIOSFERA](2.3%20BIOSFERA/) — práctica: Control de humedad de tierra.
 - [3.1 Sociedad_OrganizacionSocial](3.1%20Sociedad_OrganizacionSocial/) — práctica: Chat bot de reportes
+- [3.2 IDH_Estado](3.2%20IDH_Estado/) — práctica: Pagina INDEX que da resultados sobre el IDH del estado seleccionado.
+- 
