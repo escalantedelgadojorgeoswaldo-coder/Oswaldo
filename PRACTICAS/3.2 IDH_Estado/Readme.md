@@ -14,6 +14,9 @@ Interpretar el IDH y sus tres componentes (salud, educación e ingreso) para las
 - Archivo index.html (HTML, CSS y JavaScript)
 - Cuenta de GitHub para publicar con GitHub Pages
 
+## Página
+[Abrir la página IDH de mi estado](Pagina/index.html)
+
 ## Diagrama
 Escenario IDH_Estado en Make: Webhooks (Custom webhook) → Make AI Agent (con Knowledge) → Webhook Response.
 
