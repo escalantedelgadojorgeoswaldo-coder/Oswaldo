@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDH de mi estado</title>
+<style>
+  :root {
+    --verde-oscuro: #1b4332;
+    --verde: #2d6a4f;
+    --verde-medio: #40916c;
+    --verde-claro: #d8f3dc;
+    --crema: #f4f9f1;
+    --tierra: #8a5a2b;
+    --texto: #1f2d24;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--texto);
+    background: linear-gradient(180deg, var(--verde-claro) 0%, var(--crema) 45%);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+  header {
+    background: var(--verde-oscuro);
+    color: #fff;
+    text-align: center;
+    padding: 28px 16px 22px;
+    border-bottom: 6px solid var(--verde-medio);
+  }
+  header h1 { margin: 0 0 6px; font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  header p { margin: 0; opacity: .9; font-size: 1rem; }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+  .tarjeta {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 10px rgba(27, 67, 50, .12);
+    border: 1px solid #cfe5d3;
+  }
+  .tarjeta h2 { margin: 0 0 8px; font-size: 1.2rem; color: var(--verde); }
+  .tarjeta p { margin: 0 0 8px; }
+  .tarjeta p:last-child { margin-bottom: 0; }
+  label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--verde-oscuro); }
+  .fila { display: flex; gap: 10px; flex-wrap: wrap; }
+  select {
+    flex: 1 1 240px;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid var(--verde-medio);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--texto);
+  }
+  button {
+    flex: 0 0 auto;
+    padding: 12px 26px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--verde);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  button:hover:not(:disabled) { background: var(--verde-oscuro); }
+  button:disabled { background: #94a89c; cursor: not-allowed; }
+  select:focus, button:focus-visible { outline: 3px solid #95d5b2; outline-offset: 2px; }
+  #resultado {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--crema);
+    border-left: 6px solid var(--verde-medio);
+    border-radius: 8px;
+    white-space: pre-line;
+    min-height: 56px;
+    overflow-wrap: anywhere;
+  }
+  #resultado.vacio { color: #6b7d72; font-style: italic; }
+  #resultado.error { border-left-color: #b23a2e; background: #fdeceb; color: #7a1f17; }
+  #resultado.cargando { color: var(--tierra); font-weight: 600; }
+  footer { text-align: center; font-size: .85rem; color: #55685c; padding: 0 16px 24px; }
+  @media (max-width: 480px) {
+    .tarjeta { padding: 16px; }
+    button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>IDH de mi estado</h1>
+  <p>Consulta el Índice de Desarrollo Humano de las entidades de México</p>
+</header>
+
+<main>
+  <section class="tarjeta">
+    <h2>¿Qué es el IDH?</h2>
+    <p>El Índice de Desarrollo Humano (IDH) resume en un valor de 0 a 1 tres capacidades básicas de las personas:
+       vivir una vida larga y saludable (salud), adquirir conocimientos (educación) y tener un nivel de vida digno (ingreso).
+       Entre más cerca de 1, mayor es el desarrollo humano.</p>
+    <p>Elige una entidad federativa y una inteligencia artificial te explicará su IDH usando únicamente los datos oficiales del PNUD.</p>
+  </section>
+
+  <section class="tarjeta">
+    <label for="entidad">Entidad federativa</label>
+    <div class="fila">
+      <select id="entidad" name="entidad">
+        <option value="Aguascalientes">Aguascalientes</option>
+        <option value="Baja California">Baja California</option>
+        <option value="Baja California Sur">Baja California Sur</option>
+        <option value="Campeche">Campeche</option>
+        <option value="Chiapas">Chiapas</option>
+        <option value="Chihuahua">Chihuahua</option>
+        <!-- El informe del PNUD (datos de 2012) la nombra "Distrito Federal"; ese es el valor que se envía -->
+        <option value="Distrito Federal">Ciudad de México (Distrito Federal)</option>
+        <option value="Coahuila">Coahuila</option>
+        <option value="Colima">Colima</option>
+        <option value="Durango">Durango</option>
+        <option value="Estado de México">Estado de México</option>
+        <option value="Guanajuato">Guanajuato</option>
+        <option value="Guerrero">Guerrero</option>
+        <option value="Hidalgo">Hidalgo</option>
+        <option value="Jalisco">Jalisco</option>
+        <option value="Michoacán">Michoacán</option>
+        <option value="Morelos">Morelos</option>
+        <option value="Nayarit">Nayarit</option>
+        <option value="Nuevo León">Nuevo León</option>
+        <option value="Oaxaca">Oaxaca</option>
+        <option value="Puebla">Puebla</option>
+        <option value="Querétaro">Querétaro</option>
+        <option value="Quintana Roo">Quintana Roo</option>
+        <option value="San Luis Potosí">San Luis Potosí</option>
+        <option value="Sinaloa" selected>Sinaloa</option>
+        <option value="Sonora">Sonora</option>
+        <option value="Tabasco">Tabasco</option>
+        <option value="Tamaulipas">Tamaulipas</option>
+        <option value="Tlaxcala">Tlaxcala</option>
+        <option value="Veracruz">Veracruz</option>
+        <option value="Yucatán">Yucatán</option>
+        <option value="Zacatecas">Zacatecas</option>
+      </select>
+      <button id="consultar" type="button">Consultar</button>
+    </div>
+    <div id="resultado" class="vacio" role="status" aria-live="polite">Elige una entidad y presiona "Consultar".</div>
+  </section>
+</main>
+
+<footer>Datos: PNUD México, IDH para las entidades federativas (año de los datos: 2012).</footer>
+
+<script>
+  // PEGA AQUÍ LA URL DE TU WEBHOOK DE MAKE (entre las comillas)
+  const WEBHOOK_URL = "https://hook.us2.make.com/bq3cwlm4qgrvt5rekeen3prwkexuhrt8";
+
+  const selector = document.getElementById("entidad");
+  const boton = document.getElementById("consultar");
+  const resultado = document.getElementById("resultado");
+
+  function mostrar(texto, clase) {
+    resultado.textContent = texto;      // texto plano: no se interpreta como HTML ni como JSON
+    resultado.className = clase || "";
+  }
+
+  boton.addEventListener("click", async function () {
+    const entidad = selector.value;
+
+    // Mientras espera: mensaje y botón desactivado
+    boton.disabled = true;
+    mostrar("Consultando...", "cargando");
+
+    try {
+      // Cuerpo como formulario (URLSearchParams) con un solo campo: "entidad".
+      // Sin JSON y sin encabezados personalizados.
+      const respuesta = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: new URLSearchParams({ entidad: entidad })
+      });
+
+      if (!respuesta.ok) {
+        throw new Error("Respuesta con estado " + respuesta.status);
+      }
+
+      const texto = await respuesta.text();   // la respuesta llega como texto plano
+      mostrar(texto, "");
+    } catch (error) {
+      mostrar("No se pudo obtener la información, intenta de nuevo.", "error");
+    } finally {
+      boton.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
