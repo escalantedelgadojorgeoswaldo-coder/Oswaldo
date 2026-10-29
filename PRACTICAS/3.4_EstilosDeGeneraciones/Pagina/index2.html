@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estilos de vida entre generaciones</title>
+<style>
+  :root {
+    --verde-oscuro: #1b4332;
+    --verde: #2d6a4f;
+    --verde-claro: #d8f3dc;
+    --tierra: #8a6f4d;
+    --fondo: #f1f8f2;
+    --texto: #1f2d24;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--verde));
+    color: #fff;
+    padding: 32px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 2rem; }
+  header p { margin: 0 auto; max-width: 720px; font-size: 1.05rem; }
+  main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 48px; }
+  .columnas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .seccion {
+    background: #fff;
+    border-top: 6px solid var(--verde);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+  .seccion h2 { margin-top: 0; color: var(--verde-oscuro); }
+  label { display: block; font-weight: 600; margin: 14px 0 4px; font-size: .92rem; }
+  input[type="number"], textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #b7cfbf;
+    border-radius: 6px;
+    font: inherit;
+    background: #fbfefb;
+  }
+  textarea { min-height: 70px; resize: vertical; }
+  input:focus, textarea:focus { outline: 2px solid var(--verde); border-color: var(--verde); }
+  .acciones { text-align: center; margin-top: 28px; }
+  button {
+    background: var(--verde);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: var(--verde-oscuro); }
+  button:disabled { background: #8fb39d; cursor: not-allowed; }
+  #aviso { margin-top: 14px; font-weight: 600; min-height: 1.4em; }
+  .aviso-error { color: #b3261e; }
+  .aviso-info { color: var(--verde-oscuro); }
+  #resultado {
+    display: none;
+    margin: 24px auto 0;
+    max-width: 900px;
+    background: var(--verde-claro);
+    border: 2px solid var(--verde);
+    border-radius: 10px;
+    padding: 20px;
+    white-space: pre-line;
+  }
+  @media (max-width: 800px) {
+    .columnas { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Estilos de vida entre generaciones</h1>
+  <p>Se entrevistó a tres generaciones sobre sus hábitos de consumo (comida, ropa, electrónicos, transporte, basura, desechables y agua) para compararlos y entender qué cambió con el tiempo.</p>
+</header>
+
+<main>
+  <div class="columnas" id="columnas"></div>
+
+  <div class="acciones">
+    <button id="btnComparar" type="button">Comparar respuestas</button>
+    <div id="aviso" role="status"></div>
+  </div>
+
+  <div id="resultado"></div>
+</main>
+
+<script>
+  // Pega aquí la URL del webhook de Make (Webhooks > Custom webhook)
+  const WEBHOOK_URL = "https://hook.us2.make.com/vv3ccrajs5v9re1mb0ch9jbpmfhes221";
+
+  const PREGUNTAS = [
+    "¿Cómo se conseguía la comida en casa: mercado, tienda, súper o cultivo propio?",
+    "¿Qué se hacía con la ropa o los zapatos viejos o rotos?",
+    "¿Qué aparatos electrónicos tenías y cada cuánto los cambiabas?",
+    "¿Cómo te transportabas a la escuela o al trabajo?",
+    "¿Qué se hacía con la basura? ¿Se separaba o se reutilizaba algo?",
+    "¿Usabas bolsas, botellas o envases desechables?",
+    "¿Cómo se usaba y se cuidaba el agua en casa?",
+    "¿Qué consideras necesario para vivir bien?"
+  ];
+
+  const PERSONAS = [
+    { id: "abuelo", titulo: "Abuelo/a" },
+    { id: "padre",  titulo: "Padre/Madre" },
+    { id: "amigo",  titulo: "Amigo/a" }
+  ];
+
+  const columnas = document.getElementById("columnas");
+  const btn = document.getElementById("btnComparar");
+  const aviso = document.getElementById("aviso");
+  const resultado = document.getElementById("resultado");
+
+  // Construye las tres secciones
+  PERSONAS.forEach(function (p) {
+    const sec = document.createElement("section");
+    sec.className = "seccion";
+    let html = "<h2>" + p.titulo + "</h2>";
+    html += '<label for="' + p.id + '_edad">Edad</label>';
+    html += '<input type="number" min="1" max="120" id="' + p.id + '_edad">';
+    PREGUNTAS.forEach(function (q, i) {
+      html += '<label for="' + p.id + "_" + i + '">' + (i + 1) + ". " + q + "</label>";
+      html += '<textarea id="' + p.id + "_" + i + '"></textarea>';
+    });
+    sec.innerHTML = html;
+    columnas.appendChild(sec);
+  });
+
+  function mostrarAviso(texto, tipo) {
+    aviso.textContent = texto;
+    aviso.className = tipo === "error" ? "aviso-error" : "aviso-info";
+  }
+
+  // Verifica que todos los campos estén llenos
+  function camposCompletos() {
+    for (const p of PERSONAS) {
+      if (!document.getElementById(p.id + "_edad").value.trim()) return false;
+      for (let i = 0; i < PREGUNTAS.length; i++) {
+        if (!document.getElementById(p.id + "_" + i).value.trim()) return false;
+      }
+    }
+    return true;
+  }
+
+  // Arma el texto de cada persona
+  function armarTexto(id) {
+    let t = "Edad: " + document.getElementById(id + "_edad").value.trim();
+    PREGUNTAS.forEach(function (q, i) {
+      t += "\n" + (i + 1) + ". " + q + ": " + document.getElementById(id + "_" + i).value.trim();
+    });
+    return t;
+  }
+
+  btn.addEventListener("click", async function () {
+    resultado.style.display = "none";
+
+    if (!camposCompletos()) {
+      mostrarAviso("Faltan campos por llenar. Completa la edad y las 8 respuestas de las tres personas.", "error");
+      return;
+    }
+
+    const datos = new URLSearchParams();
+    datos.append("abuelo", armarTexto("abuelo"));
+    datos.append("padre", armarTexto("padre"));
+    datos.append("amigo", armarTexto("amigo"));
+
+    mostrarAviso("Analizando respuestas, esto puede tardar unos segundos...", "info");
+    btn.disabled = true;
+
+    try {
+      const resp = await fetch(WEBHOOK_URL, { method: "POST", body: datos });
+      if (!resp.ok) throw new Error("Respuesta no válida");
+      const texto = await resp.text();
+      resultado.textContent = texto;
+      resultado.style.display = "block";
+      mostrarAviso("", "info");
+    } catch (e) {
+      mostrarAviso("No se pudo obtener el análisis, intenta de nuevo.", "error");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
