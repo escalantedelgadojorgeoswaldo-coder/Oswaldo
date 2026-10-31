@@ -27,6 +27,8 @@ Escenario Generaciones en Make: Webhooks (Custom webhook) → Make AI Agent → 
 [Blueprint del escenario de Make](Codigo/Generaciones.blueprint.json)
 
 [Página web (index2.html) visible](https://escalantedelgadojorgeoswaldo-coder.github.io/Oswaldo/PRACTICAS/3.4_EstilosDeGeneraciones/Pagina/index2.html)
+
+
 [Página web (index2.html) codigo](Pagina/index2.html)
 
 
