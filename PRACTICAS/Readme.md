@@ -9,4 +9,5 @@
 - [3.1 Sociedad_OrganizacionSocial](3.1%20Sociedad_OrganizacionSocial/) — práctica: Chat bot de reportes
 - [3.2 IDH_Estado](3.2%20IDH_Estado/) — práctica: Pagina INDEX que da resultados sobre el IDH del estado seleccionado.
 - [3.3 Clasificador De Residuos](3.3_ClasificadorDeResiduos/) — práctica: Bot de Telegram que analice imágenes de residuos y las clasifique.
+- [3.4 Estilos De Generaciones](3.4_EstilosDeGeneraciones/) — práctica: pagina web que pregunta diferentes cosas de la juventud de las personas y compara resultados.
 
