@@ -28,7 +28,6 @@
   }
 
   header {
-    background: var(--bosque, var(--bosque));
     background: linear-gradient(160deg, var(--bosque) 0%, #1d4a3b 55%, var(--mar) 100%);
     color: #f3faf5;
     padding: 3rem 1.25rem 4.5rem;
@@ -44,10 +43,7 @@
     clip-path: ellipse(75% 100% at 50% 100%);
   }
 
-  .contenedor {
-    max-width: 760px;
-    margin: 0 auto;
-  }
+  .contenedor { max-width: 760px; margin: 0 auto; }
 
   h1 {
     font-family: Georgia, "Times New Roman", serif;
@@ -58,12 +54,7 @@
     letter-spacing: -0.01em;
   }
 
-  header p {
-    margin: 0;
-    max-width: 56ch;
-    color: #cfe5d8;
-    font-size: 1.05rem;
-  }
+  header p { margin: 0; max-width: 56ch; color: #cfe5d8; font-size: 1.05rem; }
 
   main {
     max-width: 760px;
@@ -81,24 +72,11 @@
     border-top: 5px solid var(--musgo);
   }
 
-  .fila {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
-    align-items: flex-end;
-  }
+  .fila { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: flex-end; }
 
-  .campo {
-    flex: 1 1 260px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
+  .campo { flex: 1 1 260px; display: flex; flex-direction: column; gap: 0.35rem; }
 
-  label {
-    font-weight: 700;
-    color: var(--bosque);
-  }
+  label { font-weight: 700; color: var(--bosque); }
 
   select {
     font: inherit;
@@ -123,25 +101,14 @@
   }
 
   button:hover:not(:disabled) { background: #3f6437; }
+  button:disabled { background: #93a99a; cursor: not-allowed; }
 
-  button:disabled {
-    background: #93a99a;
-    cursor: not-allowed;
-  }
-
-  select:focus-visible,
-  button:focus-visible,
-  a:focus-visible {
+  select:focus-visible, button:focus-visible, a:focus-visible {
     outline: 3px solid var(--sol);
     outline-offset: 2px;
   }
 
-  #estado {
-    margin: 1.25rem 0 0;
-    color: var(--mar);
-    font-weight: 700;
-  }
-
+  #estado { margin: 1.25rem 0 0; color: var(--mar); font-weight: 700; }
   #estado.error { color: var(--error); }
 
   #resultados { margin-top: 1.5rem; }
@@ -161,10 +128,7 @@
     color: var(--bosque);
   }
 
-  .fecha {
-    color: var(--suave);
-    font-size: 0.95rem;
-  }
+  .fecha { color: var(--suave); font-size: 0.95rem; }
 
   #respuesta {
     white-space: pre-line;
@@ -176,17 +140,9 @@
     overflow-wrap: anywhere;
   }
 
-  #respuesta a {
-    color: var(--mar);
-    font-weight: 700;
-  }
+  #respuesta a { color: var(--mar); font-weight: 700; }
 
-  footer {
-    text-align: center;
-    color: var(--suave);
-    font-size: 0.9rem;
-    padding: 0 1.25rem 2rem;
-  }
+  footer { text-align: center; color: var(--suave); font-size: 0.9rem; padding: 0 1.25rem 2rem; }
 
   .oculto { display: none; }
 
@@ -196,9 +152,7 @@
     button { width: 100%; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
-  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -245,7 +199,7 @@
 
 <script>
   // PEGA AQUÍ la URL de tu webhook de Make (Webhooks > Custom webhook)
-  const WEBHOOK_URL = "https://hook.us2.make.com/4xtc2j8qyvrhxekrx8iv28ekny29w27a";
+  const WEBHOOK_URL = "https://hook.us2.make.com/aptri5spg00io83g3gcfrrdjq9sgs3ag";
 
   const selectTema = document.getElementById("tema");
   const boton = document.getElementById("btnVer");
