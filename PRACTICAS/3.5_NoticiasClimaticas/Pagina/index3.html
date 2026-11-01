@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noticias climáticas del día</title>
+<style>
+  :root {
+    --bosque: #17352a;
+    --musgo: #4f7a45;
+    --mar: #1f7a74;
+    --bruma: #eaf2ec;
+    --hoja: #ffffff;
+    --sol: #e3a62b;
+    --texto: #1c2a24;
+    --suave: #5b6b63;
+    --error: #a63a2a;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+    color: var(--texto);
+    background: var(--bruma);
+    line-height: 1.55;
+  }
+
+  header {
+    background: var(--bosque, var(--bosque));
+    background: linear-gradient(160deg, var(--bosque) 0%, #1d4a3b 55%, var(--mar) 100%);
+    color: #f3faf5;
+    padding: 3rem 1.25rem 4.5rem;
+    position: relative;
+  }
+
+  header::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 46px;
+    background: var(--bruma);
+    clip-path: ellipse(75% 100% at 50% 100%);
+  }
+
+  .contenedor {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 6vw, 3.1rem);
+    line-height: 1.1;
+    margin: 0 0 0.9rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  header p {
+    margin: 0;
+    max-width: 56ch;
+    color: #cfe5d8;
+    font-size: 1.05rem;
+  }
+
+  main {
+    max-width: 760px;
+    margin: -1.5rem auto 3rem;
+    padding: 0 1.25rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .panel {
+    background: var(--hoja);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 24px rgba(23, 53, 42, 0.12);
+    border-top: 5px solid var(--musgo);
+  }
+
+  .fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: flex-end;
+  }
+
+  .campo {
+    flex: 1 1 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  label {
+    font-weight: 700;
+    color: var(--bosque);
+  }
+
+  select {
+    font: inherit;
+    padding: 0.7rem 0.8rem;
+    border: 2px solid #b9cdbf;
+    border-radius: 9px;
+    background: #fbfdfb;
+    color: var(--texto);
+    width: 100%;
+  }
+
+  button {
+    font: inherit;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 9px;
+    background: var(--musgo);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  button:hover:not(:disabled) { background: #3f6437; }
+
+  button:disabled {
+    background: #93a99a;
+    cursor: not-allowed;
+  }
+
+  select:focus-visible,
+  button:focus-visible,
+  a:focus-visible {
+    outline: 3px solid var(--sol);
+    outline-offset: 2px;
+  }
+
+  #estado {
+    margin: 1.25rem 0 0;
+    color: var(--mar);
+    font-weight: 700;
+  }
+
+  #estado.error { color: var(--error); }
+
+  #resultados { margin-top: 1.5rem; }
+
+  .encabezado-resultados {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.9rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .encabezado-resultados h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.4rem;
+    margin: 0;
+    color: var(--bosque);
+  }
+
+  .fecha {
+    color: var(--suave);
+    font-size: 0.95rem;
+  }
+
+  #respuesta {
+    white-space: pre-line;
+    background: #f5faf6;
+    border: 1px solid #cfe0d4;
+    border-left: 5px solid var(--mar);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    overflow-wrap: anywhere;
+  }
+
+  #respuesta a {
+    color: var(--mar);
+    font-weight: 700;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--suave);
+    font-size: 0.9rem;
+    padding: 0 1.25rem 2rem;
+  }
+
+  .oculto { display: none; }
+
+  @media (max-width: 480px) {
+    header { padding-top: 2.2rem; }
+    .panel { padding: 1.1rem; }
+    button { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor">
+    <h1>Noticias climáticas del día</h1>
+    <p>Esta página muestra un resumen de las noticias ambientales más recientes, explicado por inteligencia artificial.</p>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="fila">
+      <div class="campo">
+        <label for="tema">Tema</label>
+        <select id="tema" name="tema">
+          <option value="huracanes Pacífico mexicano">huracanes Pacífico mexicano</option>
+          <option value="contaminación del mar">contaminación del mar</option>
+          <option value="plásticos de un solo uso">plásticos de un solo uso</option>
+          <option value="energías renovables México">energías renovables México</option>
+          <option value="sequía Sinaloa">sequía Sinaloa</option>
+          <option value="Mazatlán medio ambiente">Mazatlán medio ambiente</option>
+        </select>
+      </div>
+      <button id="btnVer" type="button">Ver noticias</button>
+    </div>
+
+    <p id="estado" role="status" aria-live="polite"></p>
+
+    <div id="resultados" class="oculto">
+      <div class="encabezado-resultados">
+        <h2 id="tituloResultados">Resultados</h2>
+        <span class="fecha" id="fechaHoy"></span>
+      </div>
+      <div id="respuesta"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Resumen generado con inteligencia artificial. Verifica los datos abriendo las fuentes originales.
+</footer>
+
+<script>
+  // PEGA AQUÍ la URL de tu webhook de Make (Webhooks > Custom webhook)
+  const WEBHOOK_URL = "https://hook.us2.make.com/4xtc2j8qyvrhxekrx8iv28ekny29w27a";
+
+  const selectTema = document.getElementById("tema");
+  const boton = document.getElementById("btnVer");
+  const estado = document.getElementById("estado");
+  const resultados = document.getElementById("resultados");
+  const tituloResultados = document.getElementById("tituloResultados");
+  const fechaHoy = document.getElementById("fechaHoy");
+  const respuesta = document.getElementById("respuesta");
+
+  function fechaDeHoy() {
+    return new Date().toLocaleDateString("es-MX", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+  // Muestra el texto plano; las líneas que empiezan con http se vuelven enlaces
+  function mostrarTexto(texto) {
+    respuesta.textContent = "";
+    const lineas = texto.split("\n");
+    lineas.forEach(function (linea, i) {
+      const limpia = linea.trim();
+      if (limpia.indexOf("http") === 0) {
+        const a = document.createElement("a");
+        a.href = limpia;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = limpia;
+        respuesta.appendChild(a);
+      } else {
+        respuesta.appendChild(document.createTextNode(linea));
+      }
+      if (i < lineas.length - 1) {
+        respuesta.appendChild(document.createTextNode("\n"));
+      }
+    });
+  }
+
+  async function verNoticias() {
+    const tema = selectTema.value;
+
+    boton.disabled = true;
+    estado.className = "";
+    estado.textContent = "Buscando y resumiendo noticias...";
+    resultados.classList.add("oculto");
+
+    try {
+      const cuerpo = new URLSearchParams();
+      cuerpo.append("tema", tema);
+
+      const r = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: cuerpo
+      });
+
+      if (!r.ok) throw new Error("Respuesta " + r.status);
+
+      const texto = await r.text();
+
+      tituloResultados.textContent = "Resultados: " + tema;
+      fechaHoy.textContent = fechaDeHoy();
+      mostrarTexto(texto);
+      resultados.classList.remove("oculto");
+      estado.textContent = "";
+    } catch (e) {
+      estado.className = "error";
+      estado.textContent = "No se pudieron obtener las noticias, intenta de nuevo.";
+    } finally {
+      boton.disabled = false;
+    }
+  }
+
+  boton.addEventListener("click", verNoticias);
+</script>
+</body>
+</html>
