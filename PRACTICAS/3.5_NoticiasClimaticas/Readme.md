@@ -34,7 +34,7 @@ Escenario Noticias Climáticas en Make: Webhooks (Custom webhook) → [completar
 [Reporte](Resultados/Reporte3.5_NoticiasClimaticas.pdf)
 
 ## Video del funcionamiento
-[Ver video](https://youtu.be/crfhU-Lo5pw?si=wnLSpSyEmvk0BB4F)
+[Ver video](https://youtu.be/1kSEfzZ-d5U?si=OrkMFUgRkzzjE1Wy)
 
 ## Conclusiones
 El proyecto permitió construir una página web conectada a Make y a un Make AI Agent que analiza noticias climáticas, sin programar el procesamiento de la información. La validación de campos vacíos evita enviar consultas incompletas, y el envío como formulario (URLSearchParams) junto con el encabezado Access-Control-Allow-Origin permite que la página publicada en GitHub Pages reciba la respuesta de Make. Sobre el análisis de la IA, coincidimos en [completar] y no en [completar], porque [completar qué dejó fuera o interpretó mal], lo que muestra que sus conclusiones deben revisarse con criterio propio. Las noticias analizadas se relacionan con la sustentabilidad en [completar], y la acción que podemos tomar en nuestro entorno es [completar], haciéndolo mediante [completar].
