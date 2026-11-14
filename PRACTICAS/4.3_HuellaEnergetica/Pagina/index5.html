@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huella energética de la nube</title>
+<style>
+  :root {
+    --fondo: #e9f2f1;
+    --tarjeta: #ffffff;
+    --verde: #2f6b3f;
+    --verde-osc: #17433f;
+    --agua: #2b7a8c;
+    --texto: #1c2a28;
+    --suave: #5a6b68;
+    --borde: #c5dad7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.5;
+  }
+  header {
+    background: var(--verde-osc);
+    color: #fff;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.7rem; }
+  header p { margin: 0 auto; max-width: 580px; color: #cfe6e2; }
+  main { max-width: 640px; margin: 0 auto; padding: 20px 16px 48px; }
+  .campo {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    margin: 0 0 14px;
+    padding: 12px 16px;
+  }
+  .campo label { display: block; font-weight: bold; color: var(--verde-osc); margin-bottom: 2px; }
+  .campo small { display: block; color: var(--suave); margin-bottom: 8px; }
+  input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background: #fbfefd;
+    color: var(--texto);
+  }
+  button {
+    width: 100%;
+    margin-top: 6px;
+    padding: 14px;
+    font-size: 1.05rem;
+    font-family: inherit;
+    border: 0;
+    border-radius: 8px;
+    background: var(--agua);
+    color: #fff;
+    cursor: pointer;
+  }
+  button:disabled { opacity: .55; cursor: not-allowed; }
+  button:focus-visible, input:focus-visible { outline: 3px solid #e0a82e; outline-offset: 2px; }
+  #resultado {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-left: 5px solid var(--verde);
+    border-radius: 8px;
+    white-space: pre-line;
+    display: none;
+  }
+  #resultado.error { border-left-color: #b3392f; color: #b3392f; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Huella energética de la nube</h1>
+  <p>Cada acción digital se procesa en centros de datos que consumen energía. Esta página estima tu huella a partir de tu uso semanal.</p>
+</header>
+
+<main>
+  <form id="formulario" novalidate>
+    <div class="campo">
+      <label for="video">Video en streaming</label>
+      <small>Horas al día (YouTube, Netflix, TikTok)</small>
+      <input type="number" id="video" name="video" min="0" step="any" inputmode="decimal">
+    </div>
+    <div class="campo">
+      <label for="musica">Música en streaming</label>
+      <small>Horas al día</small>
+      <input type="number" id="musica" name="musica" min="0" step="any" inputmode="decimal">
+    </div>
+    <div class="campo">
+      <label for="redes">Redes sociales</label>
+      <small>Horas al día</small>
+      <input type="number" id="redes" name="redes" min="0" step="any" inputmode="decimal">
+    </div>
+    <div class="campo">
+      <label for="videollamadas">Videollamadas</label>
+      <small>Horas a la semana</small>
+      <input type="number" id="videollamadas" name="videollamadas" min="0" step="any" inputmode="decimal">
+    </div>
+    <div class="campo">
+      <label for="juegos">Juegos en línea</label>
+      <small>Horas al día</small>
+      <input type="number" id="juegos" name="juegos" min="0" step="any" inputmode="decimal">
+    </div>
+    <div class="campo">
+      <label for="nube">Almacenamiento en la nube</label>
+      <small>GB guardados (fotos, archivos)</small>
+      <input type="number" id="nube" name="nube" min="0" step="any" inputmode="decimal">
+    </div>
+    <div class="campo">
+      <label for="ia">Chatbots de IA</label>
+      <small>Consultas al día</small>
+      <input type="number" id="ia" name="ia" min="0" step="1" inputmode="numeric">
+    </div>
+    <div class="campo">
+      <label for="correos">Correos electrónicos</label>
+      <small>Correos que envías al día</small>
+      <input type="number" id="correos" name="correos" min="0" step="1" inputmode="numeric">
+    </div>
+
+    <button type="button" id="calcular">Calcular mi huella</button>
+  </form>
+
+  <div id="resultado" role="status" aria-live="polite"></div>
+</main>
+
+<script>
+  // Pega aquí la URL de tu webhook de Make (entre las comillas)
+  const WEBHOOK_URL = "https://hook.us2.make.com/bliw9stjjtn80v79w39rffltxtzjqs22";
+
+  const campos = ["video", "musica", "redes", "videollamadas", "juegos", "nube", "ia", "correos"];
+  const btn = document.getElementById("calcular");
+  const resultado = document.getElementById("resultado");
+
+  function mostrar(texto, esError) {
+    resultado.style.display = "block";
+    resultado.className = esError ? "error" : "";
+    resultado.textContent = texto;
+  }
+
+  btn.addEventListener("click", async function () {
+    const datos = {};
+    for (const campo of campos) {
+      const valor = document.getElementById(campo).value.trim();
+      const numero = Number(valor);
+      if (valor === "" || isNaN(numero) || numero < 0) {
+        mostrar("Llena todos los campos con un número mayor o igual a 0.", true);
+        return;
+      }
+      datos[campo] = valor;
+    }
+
+    mostrar("Calculando...", false);
+    btn.disabled = true;
+    try {
+      const respuesta = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: new URLSearchParams(datos)
+      });
+      if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+      const texto = await respuesta.text();
+      mostrar(texto, false);
+    } catch (e) {
+      mostrar("No se pudo calcular, intenta de nuevo.", true);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
