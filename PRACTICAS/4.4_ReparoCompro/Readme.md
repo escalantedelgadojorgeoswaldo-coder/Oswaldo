@@ -38,7 +38,7 @@ Respuesta del bot a "Celular no carga":
 [Reporte](Reporte/Reporte4.4_ReparoCompro.pdf)
 
 ## Video del funcionamiento
-[Ver video]([completar: enlace del video])
+[Ver video](https://youtu.be/nexeqSShwVY?si=vnd57eLfp1qtPBZt)
 
 ## Conclusiones
 El bot de Telegram conectado a Make y a un Make AI Agent respondió en segundos con un diagnóstico probable, el tipo de obsolescencia, un costo aproximado y una recomendación para cada aparato, y el filtro evitó gastar créditos con mensajes que no eran texto o que eran comandos. Sobre el análisis de la IA, coincidimos en [completar: qué estimaciones coincidieron con el taller] y no en [completar: cuáles no], porque, por ejemplo, la IA clasificó una laptop con pantalla rota como obsolescencia percibida cuando era un daño físico y dio rangos de costo muy amplios (de $2,500 a $7,000 para reparar la pantalla), lo que muestra que sus conclusiones deben revisarse con criterio propio y contrastarse con una cotización real. La obsolescencia, planificada o percibida, aumenta los residuos electrónicos; la acción que podemos tomar en nuestro entorno es [completar: acción, por ejemplo preguntar antes de tirar un aparato], haciéndolo mediante [completar: cómo, por ejemplo llevarlo a un taller y pedir cotización].
