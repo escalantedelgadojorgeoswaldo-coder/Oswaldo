@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Compras local o global?</title>
+<style>
+  :root {
+    --fondo: #eef4ea;
+    --tarjeta: #ffffff;
+    --verde: #2f6b3f;
+    --verde-osc: #1e4a2b;
+    --agua: #2b7a8c;
+    --texto: #1f2a22;
+    --suave: #5b6b5f;
+    --borde: #cddcc9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.5;
+  }
+  header {
+    background: var(--verde-osc);
+    color: #fff;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.7rem; }
+  header p { margin: 0 auto; max-width: 560px; color: #d6e8d4; }
+  main { max-width: 640px; margin: 0 auto; padding: 20px 16px 48px; }
+  fieldset {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    margin: 0 0 16px;
+    padding: 14px 16px;
+  }
+  legend { font-weight: bold; padding: 0 6px; color: var(--verde-osc); }
+  label { display: block; padding: 7px 4px; cursor: pointer; }
+  input[type="radio"] { accent-color: var(--verde); margin-right: 8px; }
+  .botones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  button {
+    flex: 1 1 200px;
+    padding: 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+  }
+  #enviar { background: var(--verde); }
+  #reporte { background: var(--agua); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  button:focus-visible, input:focus-visible { outline: 3px solid #e0a82e; outline-offset: 2px; }
+  #resultado {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-left: 5px solid var(--verde);
+    border-radius: 8px;
+    white-space: pre-line;
+    display: none;
+  }
+  #resultado.error { border-left-color: #b3392f; color: #b3392f; }
+</style>
+</head>
+<body>
+<header>
+  <h1>¿Compras local o global?</h1>
+  <p>Encuesta anónima sobre hábitos de compra para la materia de Desarrollo Sustentable. No se pide tu nombre.</p>
+</header>
+
+<main>
+  <form id="formulario">
+    <fieldset>
+      <legend>¿Dónde compras la mayor parte de tu comida?</legend>
+      <label><input type="radio" name="comida" value="Mercado o tianguis">Mercado o tianguis</label>
+      <label><input type="radio" name="comida" value="Tienda de barrio">Tienda de barrio</label>
+      <label><input type="radio" name="comida" value="Supermercado">Supermercado</label>
+      <label><input type="radio" name="comida" value="En línea">En línea</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Dónde compras tu ropa?</legend>
+      <label><input type="radio" name="ropa" value="Negocio local">Negocio local</label>
+      <label><input type="radio" name="ropa" value="Tienda departamental">Tienda departamental</label>
+      <label><input type="radio" name="ropa" value="App internacional">App internacional</label>
+      <label><input type="radio" name="ropa" value="Segunda mano">Segunda mano</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Con qué frecuencia compras en apps internacionales?</legend>
+      <label><input type="radio" name="apps" value="Nunca">Nunca</label>
+      <label><input type="radio" name="apps" value="Una vez al mes">Una vez al mes</label>
+      <label><input type="radio" name="apps" value="Varias veces al mes">Varias veces al mes</label>
+      <label><input type="radio" name="apps" value="Cada semana">Cada semana</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Qué pesa más al comprar?</legend>
+      <label><input type="radio" name="criterio" value="Precio">Precio</label>
+      <label><input type="radio" name="criterio" value="Calidad">Calidad</label>
+      <label><input type="radio" name="criterio" value="Cercanía">Cercanía</label>
+      <label><input type="radio" name="criterio" value="Apoyar lo local">Apoyar lo local</label>
+      <label><input type="radio" name="criterio" value="Marca">Marca</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Sabes de dónde viene lo que compras?</legend>
+      <label><input type="radio" name="origen" value="Sí">Sí</label>
+      <label><input type="radio" name="origen" value="A veces">A veces</label>
+      <label><input type="radio" name="origen" value="No">No</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Rango de edad</legend>
+      <label><input type="radio" name="edad" value="Menos de 18">Menos de 18</label>
+      <label><input type="radio" name="edad" value="18 a 29">18 a 29</label>
+      <label><input type="radio" name="edad" value="30 a 49">30 a 49</label>
+      <label><input type="radio" name="edad" value="50 o más">50 o más</label>
+    </fieldset>
+
+    <div class="botones">
+      <button type="button" id="enviar">Enviar respuesta</button>
+      <button type="button" id="reporte">Generar reporte</button>
+    </div>
+  </form>
+
+  <div id="resultado" role="status" aria-live="polite"></div>
+</main>
+
+<script>
+  // Pega aquí la URL de tu webhook de Make (entre las comillas)
+  const WEBHOOK_URL = "https://hook.us2.make.com/s7p1iuixrp8h268xqskufyoa46k7kb87";
+
+  const campos = ["comida", "ropa", "apps", "criterio", "origen", "edad"];
+  const formulario = document.getElementById("formulario");
+  const btnEnviar = document.getElementById("enviar");
+  const btnReporte = document.getElementById("reporte");
+  const resultado = document.getElementById("resultado");
+
+  function mostrar(texto, esError) {
+    resultado.style.display = "block";
+    resultado.className = esError ? "error" : "";
+    resultado.textContent = texto;
+  }
+
+  function bloquear(estado) {
+    btnEnviar.disabled = estado;
+    btnReporte.disabled = estado;
+  }
+
+  async function enviarAMake(datos, limpiar) {
+    mostrar("Procesando...", false);
+    bloquear(true);
+    try {
+      const respuesta = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: new URLSearchParams(datos)
+      });
+      if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+      const texto = await respuesta.text();
+      mostrar(texto, false);
+      if (limpiar) formulario.reset();
+    } catch (e) {
+      mostrar("No se pudo conectar, intenta de nuevo.", true);
+    } finally {
+      bloquear(false);
+    }
+  }
+
+  btnEnviar.addEventListener("click", function () {
+    const datos = { accion: "respuesta" };
+    for (const campo of campos) {
+      const elegido = formulario.querySelector('input[name="' + campo + '"]:checked');
+      if (!elegido) {
+        mostrar("Contesta todas las preguntas antes de enviar.", true);
+        return;
+      }
+      datos[campo] = elegido.value;
+    }
+    enviarAMake(datos, true);
+  });
+
+  btnReporte.addEventListener("click", function () {
+    enviarAMake({ accion: "reporte" }, false);
+  });
+</script>
+</body>
+</html>
